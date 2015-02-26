@@ -18,8 +18,11 @@ Problem that is being addressed is to complexity of the ansible projects, soon a
     
     group_vars/
         all                   # variables under this directory belongs all the groups
+            common.yml        # Common role variable file
         webservers            # here we assign variables to webservers groups
+            nginx.yml         # Each file will corspond to a role i.e. nginx
         postgresql            # here we assign variables to postgresql groups
+            postgresql.yml    # Each file will corspond to a role i.e. postgresql
     plays
         ansible.cfg           # Ansible.cfg file that holds all ansible config
         webservers.yml        # playbook for webserver tier
