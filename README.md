@@ -93,8 +93,9 @@ Most likely you will need different stages(e.g. test, development, production) f
 Variables are wonderful, that allows you to use all this existing code by just setting some values. Ansible offers many different ways to use variables. However, soon as your project starts to get bigger, and more you spread variables here and there, more problems you will encounter. Therefore it is good practice to keep all your variables in one place, and this place happen to be group_vars. They are not host dependent, so it will help you to have a better staging environment as well. Furthermore, if you have internal roles that you have developed, keep the variables out of them as well, so you can reuse them easily.
 
 
+
 ##5. Name consistency
-If you want to maintain your code, keep the name consistency between, play and inventories, roles and group variables. Use the name of the roles to separate different variables in each group. If you have a role called nginx keep the variables under your group_vars with the same name.
+If you want to maintain your code, keep the name consistency between, play and inventories, roles and group variables. Use the name of the roles to separate different variables in each group. If you have a role called nginx keep the variables under your group_vars/webservers/nginx.yml group_vars support directory and every file inside the group will be loaded
 
 
 
