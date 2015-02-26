@@ -15,14 +15,14 @@ Problem that is being addressed is to complexity of the ansible projects, soon a
     production.ini            # inventory file for production stage
     development.ini           # inventory file for development stage
     test.ini                  # inventory file for test stage
-    
     group_vars/
         all                   # variables under this directory belongs all the groups
-            common.yml        # Common role variable file
+            apt.yml           # ansible-apt role variable file for all groups
         webservers            # here we assign variables to webservers groups
-            nginx.yml         # Each file will corspond to a role i.e. nginx
+            apt.yml           # Each file will correspond to a role i.e. apt.yml
+            nginx.yml         # ""
         postgresql            # here we assign variables to postgresql groups
-            postgresql.yml    # Each file will corspond to a role i.e. postgresql
+            postgresql.yml    # Each file will correspond to a role i.e. postgresql
     plays
         ansible.cfg           # Ansible.cfg file that holds all ansible config
         webservers.yml        # playbook for webserver tier
@@ -100,7 +100,7 @@ If you want to maintain your code, keep the name consistency between, play and i
 
 
 #TODO
-* ansible-vault
+* ansible-vault example
 
 #License
 MIT License.
