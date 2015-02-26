@@ -1,0 +1,5 @@
+---
+nginx_etc              : "/etc/nginx"
+nginx_max_clients      : 1024
+nginx_install_repo     : "nginx"
+nginx_apt_state        : "present"

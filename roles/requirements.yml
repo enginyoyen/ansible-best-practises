@@ -1,0 +1,33 @@
+- src: git+https://github.com/yetu/ansible-apt.git
+  version: "v0.1.4"
+  name: ansible-apt
+  path : external
+
+- src: git+https://github.com/yetu/ansible-hostname.git
+  version: "v0.1.2"
+  name: ansible-hostname
+  path : external
+
+- src: git+https://github.com/Stouts/Stouts.sudo.git
+  version: "1.0.0"
+  path : external
+
+- src: git+https://github.com/ANXS/openssh.git
+  version: "v1.0.1"
+  name: ANXS.openssh
+  path : external
+
+- src: git+https://github.com/knopki/ansible-locale.git
+  version: "v1.0.3"
+  name: knopki.locale
+  path : external
+
+- src: git+https://github.com/ANXS/postgresql.git
+  version: "v1.1.1"
+  name: ANXS.postgresql
+  path : external
+
+- src: git+https://github.com/yetu/ansible-nginx.git
+  version: "v1.0.1"
+  name: ansible-nginx
+  path : external

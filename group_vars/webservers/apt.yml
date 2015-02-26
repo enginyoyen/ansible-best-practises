@@ -1,0 +1,11 @@
+---
+
+apt_default_key_urls      :
+    - "http://nginx.org/keys/nginx_signing.key"
+
+apt_default_repositories  :
+    - "deb http://nginx.org/packages/ubuntu/ precise nginx"
+    - "deb-src http://nginx.org/packages/ubuntu/ precise nginx"
+
+apt_default_packages      :
+    - "nginx=1.6.2-1~precise"

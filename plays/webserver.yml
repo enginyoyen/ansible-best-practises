@@ -1,0 +1,9 @@
+---
+
+- name: webserver.yml | All roles
+  hosts: webserver
+  sudo: True
+
+  roles:
+    - { role: common,                   tags: ["common"] }
+    - { role: ansible-nginx,            tags: ["nginx"] }

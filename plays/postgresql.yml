@@ -1,0 +1,9 @@
+---
+
+- name: postgresql.yml | All roles
+  hosts: postgresql
+  sudo: True
+
+  roles:
+    - { role: common,                   tags: ["common"] }
+    - { role: ANXS.postgresql,          tags: ["postgresql"] }

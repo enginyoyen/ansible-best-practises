@@ -1,0 +1,7 @@
+---
+dependencies:
+  - {role: ansible-apt,             tags: apt }
+  - {role: ansible-hostname,        tags: hostname }
+  - {role: Stouts.sudo,             tags: sudo }
+  - {role: ANXS.openssh,            tags: openssh }
+  - {role: knopki.locale,           tags: locale }

@@ -1,0 +1,15 @@
+---
+## Deploy Apt source custom template
+apt_update_source_list         : "template"  
+
+## use netherland mirror
+apt_update_source_list_mirror  : "http://nl.archive.ubuntu.com/ubuntu/" 
+
+## Install unattended package
+unattended_install             : True
+
+apt_default_packages           :
+                                  - python-apt
+                                  - unattended-upgrades
+                                  - language-pack-en-base
+                                  - unzip
