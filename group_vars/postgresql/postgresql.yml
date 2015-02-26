@@ -11,11 +11,11 @@ postgresql_databases          : [
                                 ]
 
 postgresql_users              : [
-                                  {name: "user_1", pass: "secret_password"},
-                                  {name: "user_2", pass: "secret_password"}
+                                  {name: "jane", pass: "{{ postgresql_users_jane }}"},
+                                  {name: "joe", pass: "{{ postgresql_users_joe }}"}
                                 ]
 
 postgresql_user_privileges    : [
-                                  {name: "user_1", db: "products"},
-                                  {name: "user_2", db: "partners"}
+                                  {name: "jane", db: "products"},
+                                  {name: "joe", db: "partners"}
                                 ]

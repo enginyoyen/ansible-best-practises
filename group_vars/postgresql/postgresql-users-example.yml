@@ -1,0 +1,4 @@
+#This is an example of decrypt file
+#---
+#postgresql_users_jane : "secret_password_1"
+#postgresql_users_joe  : "secret_password_2"
