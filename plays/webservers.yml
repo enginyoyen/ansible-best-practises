@@ -1,7 +1,7 @@
 ---
 
-- name: webserver.yml | All roles
-  hosts: webserver
+- name: webservers.yml | All roles
+  hosts: webservers
   sudo: True
 
   roles:
