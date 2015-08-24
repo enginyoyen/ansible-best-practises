@@ -28,6 +28,6 @@
   path : external
 
 - src: git+https://github.com/yetu/ansible-nginx.git
-  version: "v1.0.1"
+  #version: "v1.0.1"
   name: ansible-nginx
   path : external
