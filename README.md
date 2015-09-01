@@ -29,7 +29,7 @@ This is the directory layout of this repository with explanation.
     development.ini           # inventory file for development stage
     test.ini                  # inventory file for test stage
     vpass                     # ansible-vault password file
-                              # This file shoul not be commited into the repository
+                              # This file should not be commited into the repository
                               # therefore file is in ignored by git
     group_vars/
         all                   # variables under this directory belongs all the groups
