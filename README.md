@@ -8,6 +8,7 @@ If infrastructures are to be treated as a code than projects that manage them mu
 * Staging
 * Complexity of plays
 * Encryption of data(e.g. passwords, certificates)
+* Installation of ansible and module dependencies
 
 ##TL;DR
 * Do not keep external roles in your repository, use ansible-galaxy
@@ -19,6 +20,7 @@ If infrastructures are to be treated as a code than projects that manage them mu
 * Different environments(development,test,production) must be close as possible, if not equal
 * Do not put your password or certificates as plain text in your git repo, use ansible-vault for encrypting
 * Use tags in your play
+* Keep all your ansible dependencies in a single place and make the installation dead-simple
 
 
 ##1. Directory Layout
@@ -61,13 +63,12 @@ It is a bad habit to keep the copy of roles, that are developed by other develop
 ---
 - src: ANXS.build-essential
   version: "v1.0.1"
-  path : external
 ```
 
 Roles can be downloaded with this command:
 
 ```
-ansible-galaxy install -r roles_requirements.yml
+./extensions/setup/role_update.sh
 ```
 
 
@@ -108,13 +109,31 @@ It is most likely that you will have a password or certificates in your reposito
 To decrypt the file, you need the vault password, which you can place in your root directory but it MUST NOT be committed to your git repository. You should share the password with you coworkers with some other method than committing to git a repo.
 
 
-#Running the Code
-Code in this repo is functional and test it. To run it: 
+##8. Project Setup
+As it should be very easy to set-up the work environment, all required packages that ansible needs, as well as ansible should be installed very easily. This will allow newcomers or developers to start using ansible project very fast and easy. Therefore, python_requirements.txt file is located at: 
 
-* Create a vpass text file in the root directory and add the secret code (123456)
-* Go to roles directory and execute to download roles
 ```
-ansible-galaxy install -r roles_requirements.yml --force
+extensions/setup/python_requirements.txt
+```
+
+This structure will help you to keep your dependencies in a single place, as well as making it easier to install everything including ansible. All you have to do is to execute the setup file:
+
+```
+./extensions/setup/setup.sh
+```
+
+
+#Running the Code
+Code in this repo is functional and test it. To run it, you need to install ansible and all the dependencies. You can do this simply by executing:
+
+```
+./extensions/setup/setup.sh
+```
+
+* If you all ready have ansible, and you do not want to go throught the installation simply create a vpass text file in the root directory and add the secret code (123456)
+* To install roles execure the role_update.sh which will download all the roles
+```
+./extensions/setup/role_update.sh
 ```
 * Go to plays directory and the execute and do not forget to change the host address in the development.ini
 ```
