@@ -46,16 +46,16 @@ This is the directory layout of this repository with explanation.
         postgresql.yml        # playbook for postgresql tier
 
     roles/
-        requirements.yml      # All the infromation about the roles
+        roles_requirements.yml# All the infromation about the roles
         external              # All the roles that are in git or ansible galaxy
                               # This directory is in ignored by git and all the roles in the 
-                              # requirements.yml file will be downloaded into this directory
+                              # roles_requirements.yml file will be downloaded into this directory
         internal              # All the roles that are not public 
 
 
 
 ##2. How to Manage Roles
-It is a bad habit to keep the copy of roles, that are developed by other developers, in your git repository. Therefore, you can use ansible-galaxy for installing the roles you need, at the location you need, by simply defining them in the requirements.yml:
+It is a bad habit to keep the copy of roles, that are developed by other developers, in your git repository. Therefore, you can use ansible-galaxy for installing the roles you need, at the location you need, by simply defining them in the roles_requirements.yml:
 
 ```
 ---
@@ -67,7 +67,7 @@ It is a bad habit to keep the copy of roles, that are developed by other develop
 Roles can be downloaded with this command:
 
 ```
-ansible-galaxy install -r requirements.yml
+ansible-galaxy install -r roles_requirements.yml
 ```
 
 
@@ -114,7 +114,7 @@ Code in this repo is functional and test it. To run it:
 * Create a vpass text file in the root directory and add the secret code (123456)
 * Go to roles directory and execute to download roles
 ```
-ansible-galaxy install -r requirements.yml --force
+ansible-galaxy install -r roles_requirements.yml --force
 ```
 * Go to plays directory and the execute and do not forget to change the host address in the development.ini
 ```
