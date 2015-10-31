@@ -1,0 +1,10 @@
+# Required python packages for ansible
+PyYAML
+Jinja2
+httplib2
+
+# Ansible
+ansible
+
+#Other packages
+boto
