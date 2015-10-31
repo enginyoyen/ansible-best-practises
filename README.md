@@ -11,7 +11,7 @@ If infrastructures are to be treated as a code than projects that manage them mu
 * Installation of ansible and module dependencies
 
 ##TL;DR
-* Do not keep external roles in your repository, use ansible-galaxy
+* Do not manage external roles in your repository manually, use ansible-galaxy
 * Do not use pre_task, task or post_tasks in your play, use roles to reuse the code
 * Keep all your variables in one place, if possible
 * Do not use variables in your play
@@ -50,14 +50,16 @@ This is the directory layout of this repository with explanation.
     roles/
         roles_requirements.yml# All the infromation about the roles
         external              # All the roles that are in git or ansible galaxy
-                              # This directory is in ignored by git and all the roles in the 
-                              # roles_requirements.yml file will be downloaded into this directory
+                              # Roles that are in roles_requirements.yml file will be downloaded into this directory
         internal              # All the roles that are not public 
+        
+    extension/
+        setup                 # All the setup files for updating roles and ansible dependencies     
 
 
 
 ##2. How to Manage Roles
-It is a bad habit to keep the copy of roles, that are developed by other developers, in your git repository. Therefore, you can use ansible-galaxy for installing the roles you need, at the location you need, by simply defining them in the roles_requirements.yml:
+It is a bad habit to manage the roles that are developed by other developers, in your git repository manually. It is also important to separate them so that you can distinguish those that are external and can be updated vs those that are internal. Therefore, you can use ansible-galaxy for installing the roles you need, at the location you need, by simply defining them in the roles_requirements.yml:
 
 ```
 ---
@@ -65,12 +67,12 @@ It is a bad habit to keep the copy of roles, that are developed by other develop
   version: "v1.0.1"
 ```
 
-Roles can be downloaded with this command:
+Roles can be downloaded/updated with this command:
 
 ```
 ./extensions/setup/role_update.sh
 ```
-
+This command will delete all external roles and download everything from scratch. It is a good practice, as this will not allow you to make changes in the roles.
 
 ##3. Keep your plays simple
 If you want to take the advantage of the roles, you have to keep your plays simple. 
