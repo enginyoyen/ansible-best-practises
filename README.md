@@ -50,7 +50,7 @@ This is the directory layout of this repository with explanation.
         postgresql.yml        # playbook for postgresql tier
 
     roles/
-        roles_requirements.yml# All the infromation about the roles
+        roles_requirements.yml# All the information about the roles
         external              # All the roles that are in git or ansible galaxy
                               # Roles that are in roles_requirements.yml file will be downloaded into this directory
         internal              # All the roles that are not public
