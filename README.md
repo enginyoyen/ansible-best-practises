@@ -135,7 +135,7 @@ Code in this repo is functional and test it. To run it, you need to install ansi
 ./extensions/setup/setup.sh
 ```
 
-* If you all ready have ansible, and you do not want to go through the installation simply create a vpass text file in the root directory and add the secret code (123456)
+* If you already have ansible, and you do not want to go through the installation simply create a vpass text file in the root directory and add the secret code (123456)
 * To install roles execure the role_update.sh which will download all the roles
 ```
 ./extensions/setup/role_update.sh
