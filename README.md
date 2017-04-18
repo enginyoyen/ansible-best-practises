@@ -1,4 +1,4 @@
-#Ansible Best Practises
+# Ansible Best Practises
 
 If infrastructures are to be treated as a code than projects that manage them must be treated as software projects. As your infrastructure code gets bigger and bigger you have more problems to deal with it. Code layout, variable precedence, small hacks here and there. Therefore, organization of your code is very important, and in this repository you can find some of the best practices (in our opinion) to manage your infrastructure code. Problems that are addressed are:
 
@@ -12,7 +12,7 @@ If infrastructures are to be treated as a code than projects that manage them mu
 * Installation of ansible and module dependencies
 
 
-##TL;DR
+## TL;DR
 * Do not manage external roles in your repository manually, use ansible-galaxy
 * Do not use pre_task, task or post_tasks in your play, use roles to reuse the code
 * Keep all your variables in one place, if possible
@@ -25,7 +25,7 @@ If infrastructures are to be treated as a code than projects that manage them mu
 * Keep all your ansible dependencies in a single place and make the installation dead-simple
 
 
-##1. Directory Layout
+## 1. Directory Layout
 This is the directory layout of this repository with explanation.
 
 
@@ -59,7 +59,7 @@ This is the directory layout of this repository with explanation.
         setup                 # All the setup files for updating roles and ansible dependencies
 
 
-##2. How to Manage Roles
+## 2. How to Manage Roles
 It is a bad habit to manage the roles that are developed by other developers, in your git repository manually. It is also important to separate them so that you can distinguish those that are external and can be updated vs those that are internal. Therefore, you can use ansible-galaxy for installing the roles you need, at the location you need, by simply defining them in the roles_requirements.yml:
 
 ```
@@ -76,7 +76,7 @@ Roles can be downloaded/updated with this command:
 This command will delete all external roles and download everything from scratch. It is a good practice, as this will not allow you to make changes in the roles.
 
 
-##3. Keep your plays simple
+## 3. Keep your plays simple
 If you want to take the advantage of the roles, you have to keep your plays simple.
 Therefore do not add any tasks in your main play. Your play should only consist of the list of roles that it depends on. Here is an example:
 
@@ -95,26 +95,26 @@ Therefore do not add any tasks in your main play. Your play should only consist 
 As you can see there are also no variables in this play, you can use variables in many different ways in ansible, and to keep it simple and easier to maintain do not use variables in plays. Furthermore, use tags, they give wonderful control over role execution.
 
 
-##4. Stages
+## 4. Stages
 Most likely you will need different stages (e.g. test, development, production) for the product you are either developing or helping to develop. A good way to manage different stages is to have multiple inventory files. As you can see in this repository, there are three inventory files. Each stage you have must be identical as possible, that also means, you should try to use few as possible host variables. It is best to not use at all.
 
 
-##5. Variables
+## 5. Variables
 Variables are wonderful, that allows you to use all this existing code by just setting some values. Ansible offers many different ways to use variables. However, soon as your project starts to get bigger, and more you spread variables here and there, more problems you will encounter. Therefore it is good practice to keep all your variables in one place, and this place happen to be group_vars. They are not host dependent, so it will help you to have a better staging environment as well. Furthermore, if you have internal roles that you have developed, keep the variables out of them as well, so you can reuse them easily.
 
 
-##6. Name consistency
+## 6. Name consistency
 If you want to maintain your code, keep the name consistency between your plays, inventories, roles and group variables. Use the name of the roles to separate different variables in each group. For instance, if you are using the role nginx under webservers play, variables that belong to nginx should be located under *group_vars/webservers/nginx.yml*. What this effectively means is that  group_vars supports directory and every file inside the group will be loaded. You can, of course, put all of them in a single file as well, but this is messy, therefore don't do it.
 
 
-##7. Encrypting Passwords and Certificates
+## 7. Encrypting Passwords and Certificates
 It is most likely that you will have a password or certificates in your repository. It is not a good practise to put them in a repository as plain text. You can use [ansible-vault](http://docs.ansible.com/playbooks_vault.html) to encrypt sensitive data. You can refer to [postgresql-password.yml](https://github.com/enginyoyen/ansible-best-practises/blob/master/group_vars/postgresql/postgresql-password.yml) in group variables to see the encrypted file and [postgresql-password-plain.yml](https://github.com/enginyoyen/ansible-best-practises/blob/master/group_vars/postgresql/postgresql-password-plain.yml) to see the plain text file, commented out.
 To decrypt the file, you need the vault password, which you can place in your root directory but it MUST NOT be committed to your git repository. You should share the password with you coworkers with some other method than committing to git a repo.
 
 There is also [git-crypt](https://github.com/AGWA/git-crypt) that allow you to work with a key or GPG. Its more transparent on daily work than `ansible-vault`
 
 
-##8. Project Setup
+## 8. Project Setup
 As it should be very easy to set-up the work environment, all required packages that ansible needs, as well as ansible should be installed very easily. This will allow newcomers or developers to start using ansible project very fast and easy. Therefore, python_requirements.txt file is located at:
 
 ```
@@ -128,7 +128,7 @@ This structure will help you to keep your dependencies in a single place, as wel
 ```
 
 
-#Running the Code
+# Running the Code
 Code in this repo is functional and test it. To run it, you need to install ansible and all the dependencies. You can do this simply by executing:
 
 ```
@@ -146,5 +146,5 @@ ansible-playbook -i ../development.ini webservers.yml
 ```
 
 
-#License
+# License
 MIT License.
