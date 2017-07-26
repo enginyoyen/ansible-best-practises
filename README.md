@@ -51,12 +51,12 @@ This is the directory layout of this repository with explanation.
 
     roles/
         roles_requirements.yml# All the information about the roles
-        external              # All the roles that are in git or ansible galaxy
+        external/             # All the roles that are in git or ansible galaxy
                               # Roles that are in roles_requirements.yml file will be downloaded into this directory
-        internal              # All the roles that are not public
+        internal/             # All the roles that are not public
 
     extension/
-        setup                 # All the setup files for updating roles and ansible dependencies
+        setup/                 # All the setup files for updating roles and ansible dependencies
 
 
 ## 2. How to Manage Roles
