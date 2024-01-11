@@ -1,1 +1,7 @@
 vpass
+.vpass
+
+venv
+.venv
+
+roles/external

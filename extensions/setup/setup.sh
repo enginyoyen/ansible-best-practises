@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-#TODO: Support python virtual environments for now global
 
 COLOR_END='\e[0m'
 COLOR_RED='\e[0;31m' # Red
@@ -9,7 +8,8 @@ COLOR_YEL='\e[0;33m' # Yellow
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 ROOT_DIR=$(cd "$DIR/../../" && pwd)
 
-PYTHON_REQUIREMNTS_FILE="$DIR/python_requirements.txt"
+PYTHON_REQUIREMENTS_FILE="$DIR/python_requirements.txt"
+PYTHON_VIRTUALENV="$ROOT_DIR/.venv"
 
 msg_exit() {
     printf "$COLOR_RED$@$COLOR_END"
@@ -41,18 +41,25 @@ fi
 [[ "$(whoami)" == "root" ]] && msg_exit "Please run as a normal user not root"
 
 # Check python
-[[ -z "$(which python)" ]] && msg_exit "Opps python is not installed or not in your path."
-# Check pip
-[[ -z "$(which pip)" ]] && msg_exit "pip is not installed!\nYou can try'sudo easy_install pip'"
-# Check python file
-[[ ! -f "$PYTHON_REQUIREMNTS_FILE" ]]  && msg_exit "python_requirements '$PYTHON_REQUIREMNTS_FILE' does not exist or permssion issue.\nPlease check and rerun."
+if ! command -v python3 &> /dev/null; then
+    msg_exit "Python3 is not installed or is not in your path. Please install Python and try again"
+fi
+# Check virtualenvironment
+if ! python3 -c "import venv" &> /dev/null; then
+    msg_exit "Python3 venv module not installed. Please ensure that virtualenvironments are enabled and try again"
+fi
+# Check python requirements file
+[[ ! -f "$PYTHON_REQUIREMENTS_FILE" ]]  && msg_exit "python_requirements '$PYTHON_REQUIREMENTS_FILE' does not exist or permssion issue.\nPlease check and rerun."
 
 # Install 
 # By default we upgrade all packges to latest. if we need to pin packages use the python_requirements
-echo "This script install python packages defined in '$PYTHON_REQUIREMNTS_FILE' "
-echo "Since we only support global packages installation for now we need root password."
-echo "You will be asked for your password."
-sudo -H pip install --no-cache-dir  --upgrade --requirement "$PYTHON_REQUIREMNTS_FILE"
+echo "This script install python packages defined in '$PYTHON_REQUIREMENTS_FILE' in the virtualenv at '$PYTHON_VIRTUALENV'"
+echo "Creating virtualenvironment '$PYTHON_VIRTUALENV' if it does not already exist..."
+python3 -m venv $PYTHON_VIRTUALENV
+echo "Activating the virtualenvironment..."
+source $PYTHON_VIRTUALENV/bin/activate
+echo "Installing requirements..."
+pip install --no-cache-dir  --upgrade --requirement "$PYTHON_REQUIREMENTS_FILE"
 
 
 #Touch vpass
